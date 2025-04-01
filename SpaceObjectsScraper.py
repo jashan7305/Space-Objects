@@ -26,12 +26,16 @@ driver.find_element(By.LINK_TEXT, "SATCAT").click()
 time.sleep(2)
 dropdown = driver.find_element(By.NAME, "satCatTable_length")
 dropdown.send_keys("100") 
-time.sleep(10)
+time.sleep(20)
 
 norad_ids = []
 sat_names = []
+intldess = []
 types = []
+countries = []
 launch_dates = []
+launch_sites = []
+decay_dates = []
 periods = []
 inclinations = []
 apogees = []
@@ -45,7 +49,10 @@ while num_pages < 10:
         norad_ids.append(cells[0].text.strip())
         sat_names.append(cells[1].text.strip())
         types.append(cells[3].text.strip())
+        countries.append(cells[4].text.strip())
         launch_dates.append(cells[5].text.strip())
+        launch_sites.append(cells[6].text.strip())
+        decay_dates.append(cells[7].text.strip())
         periods.append(cells[8].text.strip())
         inclinations.append(cells[9].text.strip())
         apogees.append(cells[10].text.strip())
@@ -62,8 +69,11 @@ driver.quit()
 df = pd.DataFrame({
     "NoradID": norad_ids,
     "SatName": sat_names,
+    "Country": countries,
+    "LaunchSite": launch_sites,
     "Type": types,
     "LaunchDate": launch_dates,
+    "DecayDate": decay_dates,
     "Period": periods,
     "Inclination": inclinations,
     "Apogee": apogees,
